@@ -1,16 +1,8 @@
 <template>
-  <!-- <Header /> -->
-  <router-view />
+  <component :is="$route.meta.layout || 'div'">
+    <router-view />
+  </component>
 </template>
-
-<script>
-import Header from "./components/Header.vue";
-export default {
-  components: {
-    // Header,
-  },
-};
-</script>
 
 <style lang="scss">
 #app {

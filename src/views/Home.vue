@@ -8,7 +8,10 @@
     </button>
     <button @click="toggleSort" class="btn">Sort by id</button>
   </div>
-  <div class="users">
+  <div class="loader" v-if="!users">
+    <Loader />
+  </div>
+  <div class="users" v-else>
     <UserItem :users="users" />
   </div>
 </template>
@@ -17,12 +20,15 @@
 import { computed } from "@vue/reactivity";
 import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
+
+import Loader from "@/assets/Loader.vue";
 import UserItem from "@/components/UserItem.vue";
 
 export default {
   name: "Home",
   components: {
     UserItem,
+    Loader,
   },
   setup() {
     const store = useStore();
@@ -51,7 +57,7 @@ export default {
 
 <style lang="scss">
 .search {
-  margin: 2rem auto;
+  margin: 5rem auto 2rem;
   input {
     font-size: 1rem;
     font-weight: 400;
@@ -84,6 +90,10 @@ export default {
   padding: 1rem 0;
   max-width: fit-content;
   margin: 0 auto;
+}
+
+.loader {
+  margin-top: 4rem;
 }
 
 @media screen and (max-width: 762px) {

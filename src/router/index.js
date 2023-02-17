@@ -1,41 +1,44 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
-import Login from "../views/Login.vue";
-import CreateUser from "../views/CreateUser.vue";
-import UpdateUser from "../views/UpdateUser.vue";
-import PageNotFound from "../views/PageNotFound";
+
+import mainLayout from "../layout/mainLayout.vue";
 
 const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: () => import("../views/Home.vue"),
     meta: {
       auth: true,
+      layout: mainLayout,
     },
   },
   {
     path: "/login",
     name: "login",
-    component: Login,
+    component: () => import("../views/Login.vue"),
   },
   {
     path: "/create",
     name: "CreateUser",
-    component: CreateUser,
+    component: () => import("../views/CreateUser.vue"),
     meta: {
       auth: true,
+      layout: mainLayout,
     },
   },
   {
     path: "/update/:id",
     name: "Update",
-    component: UpdateUser,
+    component: () => import("../views/UpdateUser.vue"),
     meta: {
       auth: true,
+      layout: mainLayout,
     },
   },
-  { path: "/:pathMatch(.*)*", component: PageNotFound },
+  {
+    path: "/:pathMatch(.*)*",
+    component: () => import("../views/PageNotFound"),
+  },
 ];
 
 const router = createRouter({

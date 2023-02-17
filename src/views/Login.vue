@@ -1,5 +1,5 @@
 <template>
-  <AuthForm @submit.prevent="login" />
+  <AuthForm @submit="login" />
 </template>
 
 <script>
@@ -19,7 +19,7 @@ export default {
         const res = await api.login(data);
         if (res) {
           localStorage.setItem("token", JSON.stringify(res));
-          window.location.reload();
+          router.push({ path: "/" });
         }
       } catch (error) {
         console.error(error.message);

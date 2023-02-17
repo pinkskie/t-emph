@@ -19,6 +19,7 @@ export default {
   align-items: center;
   justify-content: center;
   color: black;
+  flex-direction: column;
 }
 
 @media screen and (max-width: 762px) {
