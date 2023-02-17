@@ -1,27 +1,68 @@
 <template>
   <div class="Auth">
-    <form class="form">
+    <form class="form" @submit.prevent="submitForm">
       <div class="form-title">
         <h1>Sign in</h1>
-        <p>
-          New user ?
-          <router-link to="/register" class="link"
-            >Create an account</router-link
-          >
-        </p>
       </div>
       <div class="form-inputs">
-        <input type="text" placeholder="Username" />
-        <input type="password" placeholder="Password" />
-        <button>Sign in</button>
+        <input type="text" v-model="state.username" placeholder="Username" />
+        <span v-if="v$.username.$error" class="error">
+          {{ v$.username.$errors[0].$message }}
+        </span>
+        <input
+          type="password"
+          v-model="state.password"
+          placeholder="Password"
+        />
+        <span v-if="v$.password.$error" class="error">
+          {{ v$.password.$errors[0].$message }}
+        </span>
+        <button type="submit" class="btn">Sign in</button>
       </div>
     </form>
   </div>
 </template>
 
 <script>
+import useValidate from "@vuelidate/core";
+import { computed } from "@vue/reactivity";
+import { reactive } from "vue";
+import { required } from "@vuelidate/validators";
+import { useRouter } from "vue-router";
+
 export default {
   name: "AuthForm",
+  emits: ["submit"],
+  setup() {
+    const router = useRouter();
+    const state = reactive({
+      username: "",
+      password: "",
+    });
+
+    const rules = computed(() => {
+      return {
+        username: { required },
+        password: { required },
+      };
+    });
+
+    const v$ = useValidate(rules, state);
+
+    return {
+      state,
+      v$,
+      router,
+    };
+  },
+  methods: {
+    submitForm() {
+      this.v$.$validate();
+      if (this.v$.$errors.length === 0) {
+        this.$emit("submit", this.state);
+      }
+    },
+  },
 };
 </script>
 
@@ -67,18 +108,25 @@ export default {
         font-family: inherit;
       }
     }
-    button {
-      font-size: 1rem;
-      font-weight: 500;
-      cursor: pointer;
-      min-width: 40%;
-      height: auto;
-      padding: 0.65rem 1.25rem;
-      border: none;
-      outline: none;
-      border-radius: 2rem;
-      color: white;
-      background: #1a73e8;
+    .error {
+      color: red;
+      font-size: 0.8rem;
+      margin-top: -0.5rem;
+      margin-left: 1rem;
+      align-self: flex-start;
+    }
+  }
+}
+
+@media screen and (max-width: 762px) {
+  .Auth {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .form {
+      box-shadow: none;
     }
   }
 }

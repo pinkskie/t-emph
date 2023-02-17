@@ -15,3 +15,20 @@ a {
 li {
   list-style: none;
 }
+
+.btn {
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  height: auto;
+  padding: 0.65rem 1.25rem;
+  border: none;
+  outline: none;
+  border-radius: 2rem;
+  color: white;
+  background: #1a73e8;
+  transition: 0.2s ease;
+  &:hover {
+    transform: scale(1.05);
+  }
+}

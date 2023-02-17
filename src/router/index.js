@@ -1,23 +1,38 @@
 import { createRouter, createWebHistory } from "vue-router";
-import AuthPage from "../views/AuthPage.vue";
-import RegisterPage from "../views/RegisterPage.vue";
+import Home from "../views/Home.vue";
+import Login from "../views/Login.vue";
+import CreateUser from "../views/CreateUser.vue";
+import UpdateUser from "../views/UpdateUser.vue";
+
+const Authrouter = [
+  {
+    path: "/",
+    name: "login",
+    component: Login,
+  },
+];
 
 const routes = [
   {
     path: "/",
-    name: "home",
-    component: AuthPage,
+    name: "Home",
+    component: Home,
   },
   {
-    path: "/register",
-    name: "register",
-    component: RegisterPage,
+    path: "/create",
+    name: "CreateUser",
+    component: CreateUser,
+  },
+  {
+    path: "/update/:id",
+    name: "Update",
+    component: UpdateUser,
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes,
+  routes: localStorage.getItem("token") ? routes : Authrouter,
 });
 
 export default router;
