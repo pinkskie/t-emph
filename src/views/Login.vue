@@ -1,5 +1,5 @@
 <template>
-  <AuthForm @submit="login" />
+  <AuthForm @submit.prevent="login" />
 </template>
 
 <script>
