@@ -3,9 +3,9 @@
     <input type="text" placeholder="Search..." @input="handleSearch" />
   </div>
   <div class="actions">
-    <button class="btn">
-      <router-link to="/create">Add new users</router-link>
-    </button>
+    <router-link to="/create">
+      <button class="btn">Add new users</button>
+    </router-link>
     <button @click="toggleSort" class="btn">Sort by id</button>
   </div>
   <Loader />
@@ -86,7 +86,7 @@ export default {
   gap: 2rem;
   justify-content: center;
   align-items: center;
-  padding: 1rem 0;
+  padding: 1rem 0 2rem;
   max-width: fit-content;
   margin: 0 auto;
 }
