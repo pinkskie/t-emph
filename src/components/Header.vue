@@ -113,7 +113,7 @@ export default {
 }
 
 @media screen and (max-width: 762px) {
-  .container {
+  .header {
     width: 90%;
   }
   .menu {

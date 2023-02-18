@@ -1,5 +1,6 @@
 <template>
   <svg
+    v-if="loading"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     style="margin: auto; background: #fff; display: block"
@@ -196,7 +197,17 @@
 </template>
 
 <script>
+import { computed } from "@vue/reactivity";
+import { useStore } from "vuex";
+
 export default {
   name: "Loader",
+  setup() {
+    const store = useStore();
+
+    return {
+      loading: computed(() => store.getters.isLoading),
+    };
+  },
 };
 </script>

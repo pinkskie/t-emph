@@ -177,7 +177,6 @@ export default {
             last_login: Date.now(),
           });
         }
-        this.router.push({ path: "/" });
       }
     },
   },

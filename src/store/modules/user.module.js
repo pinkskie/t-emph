@@ -1,5 +1,4 @@
 import api from "@/services/api";
-import { createStore } from "vuex";
 
 export const userModule = {
   state: {
@@ -17,6 +16,7 @@ export const userModule = {
           ? state.usersList.filter(isExist)
           : [...state.usersList].filter(isExist).sort((a, b) => b.id - a.id);
       },
+    isLoading: (state) => state.loading,
   },
   mutations: {
     GET_USERS_LIST(state, payload) {

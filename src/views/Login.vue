@@ -14,12 +14,16 @@ export default {
   },
   setup() {
     const router = useRouter();
+    if (localStorage.getItem("token")) {
+      router.push("/");
+      return;
+    }
     const login = async (data) => {
       try {
         const res = await api.login(data);
         if (res) {
           localStorage.setItem("token", JSON.stringify(res));
-          router.push({ path: "/" });
+          window.location.reload();
         }
       } catch (error) {
         console.error(error.message);

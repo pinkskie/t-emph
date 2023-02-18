@@ -58,7 +58,7 @@ export default {
     cursor: pointer;
     padding: 0.5rem 0.6rem;
     position: absolute;
-    top: 0.5rem;
+    top: 0rem;
     right: 1rem;
     transition: 0.2s ease;
 

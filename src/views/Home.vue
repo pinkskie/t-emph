@@ -8,10 +8,8 @@
     </button>
     <button @click="toggleSort" class="btn">Sort by id</button>
   </div>
-  <div class="loader" v-if="!users">
-    <Loader />
-  </div>
-  <div class="users" v-else>
+  <Loader />
+  <div class="users">
     <UserItem :users="users" />
   </div>
 </template>
@@ -43,6 +41,7 @@ export default {
       input.value = e.target.value;
     };
 
+    console.log(localStorage.getItem("token"));
     onMounted(() => store.dispatch("getUsersList"));
     return {
       users: computed(() =>
@@ -90,10 +89,6 @@ export default {
   padding: 1rem 0;
   max-width: fit-content;
   margin: 0 auto;
-}
-
-.loader {
-  margin-top: 4rem;
 }
 
 @media screen and (max-width: 762px) {
